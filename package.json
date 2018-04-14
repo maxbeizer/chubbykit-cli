@@ -9,7 +9,10 @@
   "dependencies": {
     "@oclif/command": "^1.4.13",
     "@oclif/config": "^1.6.3",
-    "@oclif/plugin-help": "^1.2.4"
+    "@oclif/plugin-help": "^1.2.4",
+    "cli-ux": "^3.3.30",
+    "fs-extra": "^5.0.0",
+    "leankit-client": "^2.4.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.13.0",
