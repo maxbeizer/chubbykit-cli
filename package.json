@@ -29,7 +29,8 @@
   "files": [
     ".oclif.manifest.json",
     "/bin",
-    "/src"
+    "/src",
+    "/lib"
   ],
   "homepage": "https://github.com/maxbeizer/chubbykit-cli",
   "keywords": [
