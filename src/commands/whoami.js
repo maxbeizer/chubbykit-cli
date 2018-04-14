@@ -1,4 +1,4 @@
-const {Command, flags} = require('@oclif/command')
+const {Command} = require('@oclif/command')
 const LeanKit = require('../../lib/leankit')
 
 class WhoamiCommand extends Command {
@@ -12,13 +12,6 @@ class WhoamiCommand extends Command {
 }
 
 WhoamiCommand.description = `
-Describe the command here
-...
-Extra documentation goes here
+Check your log in status
 `
-
-WhoamiCommand.flags = {
-  name: flags.string({char: 'n', description: 'name to print'}),
-}
-
 module.exports = WhoamiCommand
