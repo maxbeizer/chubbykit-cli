@@ -12,6 +12,7 @@
     "@oclif/plugin-help": "^1.2.4",
     "cli-ux": "^3.3.30",
     "fs-extra": "^5.0.0",
+    "inquirer": "^5.2.0",
     "leankit-client": "^2.4.0"
   },
   "devDependencies": {

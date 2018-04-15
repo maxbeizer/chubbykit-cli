@@ -2,6 +2,7 @@ const {Command} = require('@oclif/command')
 const LeanKit = require('../../../lib/leankit')
 const {cli} = require('cli-ux')
 const path = require('path')
+const inquirer = require('inquirer')
 
 class BoardsDefaultCommand extends Command {
   async run() {
@@ -16,9 +17,19 @@ class BoardsDefaultCommand extends Command {
         await this.fetchBoardInfo(configPath, defaultBoardId)
       } else {
         cli.log('No default board set')
-        const newBoardDefaultId = await cli.prompt('What board would you like to set as default? (id)')
-        await this.writeNewDefaultBoard(configPath, newBoardDefaultId)
-        await this.fetchBoardInfo(configPath, newBoardDefaultId)
+        const {client} = await new LeanKit().authenticate(configPath)
+        const {data} = await client.board.list()
+        const boardsData = data.boards.map(b => {
+          return {name: b.title, value: b.id}
+        })
+        const {boardId} = await inquirer.prompt([{
+          name: 'boardId',
+          message: 'select a board',
+          type: 'list',
+          choices: boardsData,
+        }])
+        await this.writeNewDefaultBoard(configPath, boardId)
+        await this.fetchBoardInfo(configPath, boardId)
       }
     }
   }
