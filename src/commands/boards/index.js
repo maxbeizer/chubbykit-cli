@@ -1,10 +1,12 @@
 const {Command} = require('@oclif/command')
 const LeanKit = require('../../../lib/leankit')
+const path = require('path')
 
 class BoardsIndexCommand extends Command {
   async run() {
     this.parse(BoardsIndexCommand)
-    const {client} = await new LeanKit().authenticate(this.config.configDir)
+    const configPath = path.join(this.config.configDir, 'config.json')
+    const {client} = await new LeanKit().authenticate(configPath)
 
     client.board.list().then(res => {
       res.data.boards

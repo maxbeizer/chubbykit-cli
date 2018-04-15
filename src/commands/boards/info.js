@@ -1,21 +1,23 @@
 const {Command} = require('@oclif/command')
 const LeanKit = require('../../../lib/leankit')
+const {cli} = require('cli-ux')
+const path = require('path')
 
 class BoardsInfoCommand extends Command {
   async run() {
     const {args} = this.parse(BoardsInfoCommand)
-    const {client} = await new LeanKit().authenticate(this.config.configDir)
+    const configPath = path.join(this.config.configDir, 'config.json')
+    const {client} = await new LeanKit().authenticate(configPath)
 
     client.board.get(args.boardId).then(res => {
       const {title, id, users} = res.data
-      this.log('Board info:')
-      this.log(`${title} (id: ${id})`)
-      this.log('Users:')
-      users
-      .map(u => this.log(u.username))
+      cli.log('Board info:')
+      cli.log(`${title} (id: ${id})`)
+      cli.log('Users:')
+      users.map(u => cli.log(u.username))
     })
     .catch(err => {
-      this.error('Error:', err)
+      cli.error('Error:', err)
     })
   }
 }
