@@ -8,7 +8,7 @@ class BoardsIndexCommand extends Command {
 
     client.board.list().then(res => {
       res.data.boards
-      .map(b => this.log(b.title))
+      .map(b => this.log(`${b.title} (id: ${b.id})`))
     })
     .catch(err => {
       this.error('Error:', err)
